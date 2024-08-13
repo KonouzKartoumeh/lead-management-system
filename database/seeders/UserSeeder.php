@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'John',
             'email' => 'john@example.com',
-            'role' => 'instructor'
+            'role' => 'property_manager'
         ]);
 
         User::factory()->create([
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
         User::factory()->count(10)->create();
 
         User::factory()->count(10)->create([
-            'role' => 'instructor'
+            'role' => 'property_manager'
         ]);
     }
 }

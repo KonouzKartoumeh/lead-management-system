@@ -9,7 +9,7 @@ class BookingController extends Controller
 {
     public function create() {
         $scheduledClasses = ScheduledClass::upcoming()
-            ->with('classType', 'instructor')
+            ->with('classType', 'property_manager')
             ->notBooked()
             ->oldest('date_time')->get();
         return view('member.book')->with('scheduledClasses', $scheduledClasses);

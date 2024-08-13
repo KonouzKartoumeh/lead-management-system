@@ -24,10 +24,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('schedule-class', function(User $user){
-            return $user->role === 'instructor';
+            return $user->role === 'property_manager';
         });
         Gate::define('book-class', function(User $user){
-            return $user->role === 'member';
+            return $user->role === 'sales_team';
         });
     }
 }

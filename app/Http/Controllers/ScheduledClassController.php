@@ -15,7 +15,7 @@ class ScheduledClassController extends Controller
     public function index()
     {
         $scheduledClasses = auth()->user()->scheduledClasses()->upcoming()->oldest('date_time')->get();
-        return view('instructor.upcoming')->with('scheduledClasses', $scheduledClasses);
+        return view('property_manager.upcoming')->with('scheduledClasses', $scheduledClasses);
     }
 
     /**
@@ -24,7 +24,7 @@ class ScheduledClassController extends Controller
     public function create()
     {
         $classTypes = ClassType::all();
-        return view('instructor.schedule')->with('classTypes', $classTypes);
+        return view('property_manager.schedule')->with('classTypes', $classTypes);
     }
 
     /**
@@ -35,12 +35,12 @@ class ScheduledClassController extends Controller
         $date_time = $request->input('date') . " " . $request->input('time');
         $request->merge([
             'date_time' => $date_time,
-            'instructor_id' => auth()->user()->id
+            'property_manager_id' => auth()->user()->id
         ]);
 
         $validated = $request->validate([
             'class_type_id' => 'required',
-            'instructor_id' => 'required',
+            'property_manager_id' => 'required',
             'date_time' => 'required|unique:scheduled_classes,date_time|after:now'
         ]);
 

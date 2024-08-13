@@ -10,33 +10,33 @@ use Database\Seeders\ClassTypeSeeder;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class InstructorTest extends TestCase
+class property_managerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_instructor_is_redirected_to_instructor_dashboard() {
+    public function test_property_manager_is_redirected_to_property_manager_dashboard() {
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'property_manager'
         ]);
 
         $response = $this->actingAs($user)
         ->get('/dashboard');
 
-        $response->assertRedirectToRoute('instructor.dashboard');
+        $response->assertRedirectToRoute('property_manager.dashboard');
 
-        $this->followRedirects($response)->assertSeeText("Hey Instructor");
+        $this->followRedirects($response)->assertSeeText("Hey property_manager");
     }
 
-    public function test_instructor_can_schedule_a_class() {
+    public function test_property_manager_can_schedule_a_class() {
         //Given
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'property_manager'
         ]);
         $this->seed(ClassTypeSeeder::class);
 
         //When
         $response = $this->actingAs($user)
-            ->post('instructor/schedule', [
+            ->post('property_manager/schedule', [
             'class_type_id' => ClassType::first()->id,
             'date' => '2023-04-20',
             'time' => '09:00:00'
@@ -51,21 +51,21 @@ class InstructorTest extends TestCase
         $response->assertRedirectToRoute('schedule.index');
     }
 
-    public function test_instructor_can_cancel_class() {
+    public function test_property_manager_can_cancel_class() {
         // Given
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'property_manager'
         ]);
         $this->seed(ClassTypeSeeder::class);
         $scheduledClass = ScheduledClass::create([
-            'instructor_id' => $user->id,
+            'property_manager_id' => $user->id,
             'class_type_id' => ClassType::first()->id,
             'date_time' => '2023-04-20 10:00:00'
         ]);
 
         // When
         $response = $this->actingAs($user)
-            ->delete('/instructor/schedule/'.$scheduledClass->id);
+            ->delete('/property_manager/schedule/'.$scheduledClass->id);
 
         // Then
         $this->assertDatabaseMissing('scheduled_classes',[
@@ -75,22 +75,22 @@ class InstructorTest extends TestCase
 
     public function test_cannot_cancel_class_less_than_two_hours_before() {
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'property_manager'
         ]);
         $this->seed(ClassTypeSeeder::class);
         $scheduledClass = ScheduledClass::create([
-            'instructor_id' => $user->id,
+            'property_manager_id' => $user->id,
             'class_type_id' => ClassType::first()->id,
             'date_time' => now()->addHours(1)->minutes(0)->seconds(0)
         ]);
         
         $response = $this->actingAs($user)
-            ->get('instructor/schedule');
+            ->get('property_manager/schedule');
 
         $response->assertDontSeeText('Cancel');
 
         $response = $this->actingAs($user)
-            ->delete('/instructor/schedule/'.$scheduledClass->id);
+            ->delete('/property_manager/schedule/'.$scheduledClass->id);
 
         $this->assertDatabaseHas('scheduled_classes',[
             'id' =>$scheduledClass->id

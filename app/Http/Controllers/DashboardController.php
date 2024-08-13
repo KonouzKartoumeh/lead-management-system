@@ -12,12 +12,12 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         switch (auth()->user()->role) {
-            case 'instructor':
-                return redirect()->route('instructor.dashboard');
+            case 'property_manager':
+                return redirect()->route('property_manager.dashboard');
                 break;
             
-            case 'member':
-                return redirect()->route('member.dashboard');
+            case 'sales_team':
+                return redirect()->route('sales_team.dashboard');
                 break;
             
             case 'admin':

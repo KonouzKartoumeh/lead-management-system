@@ -14,7 +14,7 @@
                      <div class="flex gap-6 justify-between">
                         <div>
                            <p class="text-2xl font-bold text-purple-700">{{ $class->classType->name }}</p>
-                           <p class="text-sm">{{ $class->instructor->name }}</p>
+                           <p class="text-sm">{{ $class->property_manager->name }}</p>
                            <p class="mt-2">{{ $class->classType->description }}</p>
                            <span class="text-slate-600 text-sm">{{ $class->classType->minutes }} minutes</span>
                         </div>

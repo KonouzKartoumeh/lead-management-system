@@ -37,7 +37,7 @@ class ClassCanceledNotification extends Notification
         return (new MailMessage)
                     ->subject('Sorry, your class was canceled')
                     ->greeting('Hey '.$notifiable->name)
-                    ->line('Sorry to inform you that your '.$this->details['className'].' class was canceled by the instructor. View the schedule and book another class')
+                    ->line('Sorry to inform you that your '.$this->details['className'].' class was canceled by the property_manager. View the schedule and book another class')
                     ->action('Book a class', url('/member/book'))
                     ->line('Thank you for using our application!');
     }

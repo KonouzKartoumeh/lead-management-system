@@ -26,25 +26,25 @@ Route::get('/hello', function () {
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name('dashboard');
 
-Route::get('/instructor/dashboard', function () {
-    return view('instructor.dashboard');
-})->middleware(['auth','role:instructor'])->name('instructor.dashboard');
+Route::get('/property_manager/dashboard', function () {
+    return view('property_manager.dashboard');
+})->middleware(['auth','role:property_manager'])->name('property_manager.dashboard');
 
-Route::resource('/instructor/schedule', ScheduledClassController::class)
+Route::resource('/property_manager/schedule', ScheduledClassController::class)
 ->only(['index', 'create', 'store', 'destroy'])
-->middleware(['auth','role:instructor']);
+->middleware(['auth','role:property_manager']);
 
 
 
-/* Member routes */
-Route::middleware(['auth','role:member'])->group(function() {
-    Route::get('/member/dashboard', function () {
-        return view('member.dashboard');
-    })->name('member.dashboard');
-    Route::get('/member/book', [BookingController::class, 'create'])->name('booking.create');
-    Route::post('/member/bookings', [BookingController::class, 'store'])->name('booking.store');
-    Route::get('/member/bookings', [BookingController::class, 'index'])->name('booking.index');
-    Route::delete('/member/bookings/{id}', [BookingController::class, 'destroy'])->name('booking.destroy');
+/* sales_team routes */
+Route::middleware(['auth','role:sales_team'])->group(function() {
+    Route::get('/sales_team/dashboard', function () {
+        return view('sales_team.dashboard');
+    })->name('sales_team.dashboard');
+    Route::get('/sales_team/book', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('/sales_team/bookings', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/sales_team/bookings', [BookingController::class, 'index'])->name('booking.index');
+    Route::delete('/sales_team/bookings/{id}', [BookingController::class, 'destroy'])->name('booking.destroy');
 });
 
 
