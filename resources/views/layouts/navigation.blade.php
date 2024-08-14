@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @can('manage_leads')
+                        <x-nav-link :href="route('admin.lead')" :active="request()->routeIs('admin.lead')">
+                            Manage the leads
+                        </x-nav-link>
+                    @endcan
                     @can('schedule-class')
                     {{-- <x-nav-link :href="route('schedule.create')" :active="request()->routeIs('schedule.create')">
                         Schedule a Class

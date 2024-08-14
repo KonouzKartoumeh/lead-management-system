@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LeadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduledClassController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,11 @@ Route::get('/hello', function () {
 });
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name('dashboard');
+
+Route::get('/leads', [LeadController::class, 'index'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.lead');
+
 
 Route::get('/property_manager/dashboard', function () {
     return view('property_manager.dashboard');

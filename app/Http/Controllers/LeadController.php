@@ -9,6 +9,11 @@ use App\Models\Lead; // Make sure to import your Lead model
 
 class LeadController extends Controller
 {
+    public function index(Request $request)
+    {
+        $leads = Lead::all();
+        return view('admin.lead', compact('leads'));
+    }
     public function store(Request $request)
     {
         //dd($request);
@@ -42,4 +47,5 @@ class LeadController extends Controller
             'lead' => $lead,
         ], 201);
     }
+
 }
