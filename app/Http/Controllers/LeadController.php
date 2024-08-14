@@ -11,9 +11,11 @@ class LeadController extends Controller
 {
     public function store(Request $request)
     {
+        //dd($request);
         // Validate the incoming request
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'inquiry' => 'nullable|string',
@@ -22,7 +24,7 @@ class LeadController extends Controller
             'utm_campaign' => 'nullable|string',
             'utm_term' => 'nullable|string',
             'utm_content' => 'nullable|string',
-            'landing_page_id' => 'nullable|string',
+            'source' => 'nullable|string'
         ]);
 
         // Create a new Lead instance and save it

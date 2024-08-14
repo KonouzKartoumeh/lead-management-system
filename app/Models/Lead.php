@@ -10,7 +10,8 @@ class Lead extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'phone',
         'inquiry',
@@ -20,5 +21,6 @@ class Lead extends Model
         'utm_term',
         'utm_content',
         'landing_page_id',
+        'source'
     ];
 }
