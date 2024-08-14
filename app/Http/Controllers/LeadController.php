@@ -14,17 +14,23 @@ class LeadController extends Controller
         //dd($request);
         // Validate the incoming request
         $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:20',
             'inquiry' => 'nullable|string',
             'utm_source' => 'nullable|string',
             'utm_medium' => 'nullable|string',
             'utm_campaign' => 'nullable|string',
             'utm_term' => 'nullable|string',
             'utm_content' => 'nullable|string',
-            'source' => 'nullable|string'
+            'source' => 'required|string',
+            'user_agent' => 'nullable|string',
+            'referrer' => 'nullable|string',
+            'screen_width' => 'nullable|integer',
+            'screen_height' => 'nullable|integer',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
         ]);
 
         // Create a new Lead instance and save it

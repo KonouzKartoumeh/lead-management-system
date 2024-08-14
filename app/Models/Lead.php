@@ -21,6 +21,13 @@ class Lead extends Model
         'utm_term',
         'utm_content',
         'landing_page_id',
-        'source'
+        'source',
+        'user_agent',
+        'referrer',  
+        'screen_width',
+        'screen_height',
+        'latitude',  
+        'longitude', 
+
     ];
 }
